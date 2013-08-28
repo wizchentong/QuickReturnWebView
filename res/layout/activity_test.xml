@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <me.dt2dev.quickreturnwebview.QuickReturnWebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="#bfbfbf"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/addressbar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="textUri" />
+
+        <Button
+            android:id="@+id/go"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="@string/btn_go" />
+    </LinearLayout>
+
+</FrameLayout>
