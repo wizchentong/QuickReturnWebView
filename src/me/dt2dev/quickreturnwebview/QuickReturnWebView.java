@@ -88,16 +88,19 @@ public class QuickReturnWebView extends TitleBarWebView {
 			animation = new TranslateAnimation(Animation.ABSOLUTE, 0,
 					Animation.ABSOLUTE, 0, Animation.ABSOLUTE, translationY,
 					Animation.ABSOLUTE, 0);
+			animation.setDuration(300);
+			animation.setFillAfter(false);
+			mTitleBar.startAnimation(animation);
 		} else {
-			ViewHelper.setTranslationY(mTitleBar, -mTitleBarHeight);
+			if (scrollY < mTitleBarHeight)
+				scrollTo(0, mTitleBarHeight);
 			animation = new TranslateAnimation(Animation.ABSOLUTE, 0,
 					Animation.ABSOLUTE, 0, Animation.ABSOLUTE, translationY,
 					Animation.ABSOLUTE, -mTitleBarHeight);
-			if (scrollY < mTitleBarHeight)
-				scrollTo(0, mTitleBarHeight);
+			animation.setDuration(300);
+			animation.setFillAfter(false);
+			mTitleBar.startAnimation(animation);
+			ViewHelper.setTranslationY(mTitleBar, -mTitleBarHeight);
 		}
-		animation.setDuration(300);
-		animation.setFillAfter(false);
-		mTitleBar.startAnimation(animation);
 	}
 }
