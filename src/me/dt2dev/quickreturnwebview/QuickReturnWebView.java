@@ -40,6 +40,14 @@ public class QuickReturnWebView extends TitleBarWebView {
 		});
 	}
 
+	/**
+	 * Use for removing the padding part when get WebView preview and so on.
+	 */
+	public int getPaddingOffset() {
+		final int offset = mTitleBarHeight - getScrollY();
+		return offset > 0 ? offset : 0;
+	}
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		final int action = event.getAction();
