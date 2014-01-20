@@ -33,7 +33,7 @@ public class QuickReturnWebView extends TitleBarWebView {
 		super(context, attrs, defStyle);
 		init();
 	}
-
+	
 	private void init() {
 		mTitleBarHeight = 0;
 		mMaxTranslationY = 0;
@@ -127,5 +127,36 @@ public class QuickReturnWebView extends TitleBarWebView {
 			ViewHelper.setTranslationY(mTitleBar, newTY);
 		}
 	}
-
+	/**
+	 * 安卓原生手机加载完网页后，会自动scrollTo到内容区，即滚动TitleBar高度到内容区以保证内容显示区域最大（这是谷歌在代码里，显然他是希望这样的）。
+	 * 如果想显示TitleBar,在onPageStart时调用此方法设置过滤掉。
+	 */
+	public void disableScrollTitle(){
+		mDisableScrollTitle = true;
+	}
+	private boolean mDisableScrollTitle = false;
+	@Override
+	public void scrollTo(int x, int y) {
+		if(mDisableScrollTitle){
+			//经过一次判断后失效。
+			mDisableScrollTitle = false;
+			/*
+			 * 如果是允许阻断滑动标题且滑动距离正好是TitleBar高度，阻断。
+			 * 因为魅族是不滚动的TitleBar的，所以第一次滑动后允许阻断标识失效且不阻断。
+			 */
+			if(y == mTitleBarHeight){ 
+				return;
+			}
+		}
+		/*
+		 * 这种方式的问题是：魅族没有滑动TitleBar，那么每次用户滑动mDisableScrollTitle都是true，除非滑动距离为mTitleBarHeight。
+		 * 逻辑上不符，但效果上基本没有差距
+		 * 
+		if(mDisableScrollTitle && y == mTitleBarHeight){
+			mDisableScrollTitle = false;
+			return;
+		}
+		*/
+		super.scrollTo(x, y);
+	}
 }
