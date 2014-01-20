@@ -18,30 +18,28 @@ public class QuickReturnWebView extends TitleBarWebView {
 	private boolean isActionUpOrCancel = false;
 
 	private View mTitleBar;
+
 	public QuickReturnWebView(Context context) {
 		super(context);
-		init(context);
+		init();
 	}
 
 	public QuickReturnWebView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context);
+		init();
 	}
 
 	public QuickReturnWebView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init(context);
+		init();
 	}
 	
-	private Context mContext;
-	private void init(Context context) {
-		mContext = context;
+	private void init() {
 		mTitleBarHeight = 0;
 		mMaxTranslationY = 0;
 	}
 
 	public void setTitleBar(View titleBar) {
-		setEmbeddedTitleBarCompat(View.inflate(mContext, R.layout.header, null));
 		this.mTitleBar = titleBar;
 		this.mTitleBar.post(new Runnable() {
 

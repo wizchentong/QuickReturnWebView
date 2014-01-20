@@ -46,6 +46,8 @@ public class TestActivity extends Activity {
 			}
 		});
 		mWebView.loadUrl("http://v2ex.com");
+		mWebView.setEmbeddedTitleBarCompat(getLayoutInflater().inflate(
+				R.layout.header, null));
 		mWebView.setTitleBar(mTitleBar);
 	}
 
