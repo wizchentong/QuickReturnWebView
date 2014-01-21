@@ -1,5 +1,7 @@
 package me.dt2dev.quickreturnwebview;
 
+import com.czt.webview.QuickReturnWithBottomBarWebView;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,7 +11,7 @@ import android.webkit.WebViewClient;
 
 public class TestActivity extends Activity {
 
-	private QuickReturnWebView mWebView;
+	private QuickReturnWithBottomBarWebView mWebView;
 	private View mTitleBar;
 
 	@Override
@@ -23,7 +25,7 @@ public class TestActivity extends Activity {
 	private void findViews() {
 		mTitleBar = findViewById(R.id.titlebar);
 
-		mWebView = (QuickReturnWebView) findViewById(R.id.webview);
+		mWebView = (QuickReturnWithBottomBarWebView) findViewById(R.id.webview);
 		mWebView.setWebViewClient(new WebViewClient(){
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -49,6 +51,7 @@ public class TestActivity extends Activity {
 		mWebView.setEmbeddedTitleBarCompat(getLayoutInflater().inflate(
 				R.layout.header, null));
 		mWebView.setTitleBar(mTitleBar);
+		mWebView.setBottomBar(findViewById(R.id.bottom_bar));
 	}
 
 }

@@ -5,10 +5,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <me.dt2dev.quickreturnwebview.QuickReturnWebView
-        android:id="@+id/webview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+        <com.czt.webview.QuickReturnWithBottomBarWebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar_height"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/darker_gray"
+            android:gravity="center"
+            android:text="title" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/titlebar"
