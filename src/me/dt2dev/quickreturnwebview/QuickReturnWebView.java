@@ -33,7 +33,7 @@ public class QuickReturnWebView extends TitleBarWebView {
 		super(context, attrs, defStyle);
 		init();
 	}
-	
+
 	private void init() {
 		mTitleBarHeight = 0;
 		mMaxTranslationY = 0;
@@ -58,7 +58,7 @@ public class QuickReturnWebView extends TitleBarWebView {
 		final int offset = mTitleBarHeight - getScrollY();
 		return offset > 0 ? offset : 0;
 	}
-
+	private boolean isTouch = false;
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getActionMasked()) {
@@ -71,6 +71,7 @@ public class QuickReturnWebView extends TitleBarWebView {
 			onActionUpOrCancel();
 			break;
 		}
+		isTouch = true;
 		return super.onTouchEvent(event);
 	}
 
@@ -102,6 +103,12 @@ public class QuickReturnWebView extends TitleBarWebView {
 	@Override
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 		super.onScrollChanged(l, t, oldl, oldt);
+		if(isTouch){
+			isTouch = false;
+		}else{
+			//非手动滚动无效
+			return;
+		}
 		if (null == mTitleBar)
 			return;
 		ViewPropertyAnimator.animate(mTitleBar).cancel();
