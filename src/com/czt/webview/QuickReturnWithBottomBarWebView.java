@@ -87,8 +87,8 @@ public class QuickReturnWithBottomBarWebView  extends TitleBarWebView {
 			return;
 		final int scrollY = getScrollY();
 		if (scrollY < 0) {
-			ViewHelper.setTranslationY(mTitleBar, mMaxTranslationY);
-			ViewHelper.setTranslationY(mBottomBar, -mMaxTranslationY);
+			setTranslationY(mTitleBar, mMaxTranslationY);
+			setTranslationY(mBottomBar, -mMaxTranslationY);
 			return;
 		}
 		if (oldTY * 2 > mMinTranslationY || scrollY < mTitleBarHeight){
@@ -99,8 +99,16 @@ public class QuickReturnWithBottomBarWebView  extends TitleBarWebView {
 			startAnimation(mBottomBar, -mMinTranslationY);
 		}
 	}
-
+	private void setTranslationY(View view, int y){
+		if(view == null){
+			return;
+		}
+		ViewHelper.setTranslationY(view, y);
+	}
 	private void startAnimation(View view, int translationY) {
+		if(view == null){
+			return;
+		}
 		ViewPropertyAnimator.animate(view).cancel();
 		ViewPropertyAnimator.animate(view).translationY(translationY);
 	}
@@ -120,14 +128,16 @@ public class QuickReturnWithBottomBarWebView  extends TitleBarWebView {
 		if (null == mTitleBar)
 			return;
 		ViewPropertyAnimator.animate(mTitleBar).cancel();
-		ViewPropertyAnimator.animate(mBottomBar).cancel();
+		if (null != mBottomBar){
+			ViewPropertyAnimator.animate(mBottomBar).cancel();
+		}
 		if (isActionUpOrCancel)
 			onActionUpOrCancel();
 		final int offset = t - oldt;
 		if (t <= mTitleBarHeight && offset > 0) {
 			if (t > 0){
-				ViewHelper.setTranslationY(mTitleBar, -t);
-				ViewHelper.setTranslationY(mBottomBar, t);
+				setTranslationY(mTitleBar, -t);
+				setTranslationY(mBottomBar, t);
 				return;
 			}
 		}
@@ -137,14 +147,14 @@ public class QuickReturnWithBottomBarWebView  extends TitleBarWebView {
 			if (oldTY == mMinTranslationY)
 				return;
 			newTY = Math.max(newTY, mMinTranslationY);
-			ViewHelper.setTranslationY(mTitleBar, newTY);
-			ViewHelper.setTranslationY(mBottomBar, -newTY);
+			setTranslationY(mTitleBar, newTY);
+			setTranslationY(mBottomBar, -newTY);
 		} else if (offset < 0) {
 			if (oldTY == mMaxTranslationY)
 				return;
 			newTY = Math.min(newTY, mMaxTranslationY);
-			ViewHelper.setTranslationY(mTitleBar, newTY);
-			ViewHelper.setTranslationY(mBottomBar, -newTY);
+			setTranslationY(mTitleBar, newTY);
+			setTranslationY(mBottomBar, -newTY);
 		}
 	}
 	/**
