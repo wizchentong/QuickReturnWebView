@@ -21,6 +21,7 @@ local.properties
 .classpath
 
 *.DS_Store
+
 #IntelliJ IDEA files
 .idea/*
 *.iml
